@@ -1,0 +1,46 @@
+; Tom Chiapete
+; Computer Science 333 -- Programming Languages
+; Assignment 2
+; Feb 13, 2006
+
+; (9) (down lst) wraps parentheses around each top-level element of lst.
+
+(define down 
+	(lambda (lst)
+		(map list lst)
+	)
+)
+	
+; (1) (up lst) removes a pair of parentheses from each top-level element of lst. If a top-level element is not a list, it is included in the result, as is.
+
+(define up (lambda (lst)
+	(if (null? lst) '()
+		(if (pair? (car lst)) 
+			(append (car lst) (up (cdr lst)))
+				(else (cons (car lst) (up (cdr list))))))))
+
+
+;(3) (count-ocurrences s slist) returns the number of ocurrences of s in slist.
+
+(define count-occurrences 
+	(lambda (s slist)
+		(cond((null? slist) 0)
+			((list? slist) (+ (count-occurrences s (car slist)) (count-occurrences s( cdr slist))))
+				((equal? s slist) 1)
+					(0)
+		)
+	)
+)
+
+;(4) (flatten slist) returns a list of the symbols contained in slist in the order in which they ocur when slist is printed. Intuitively, flatten removes all the inner parentheses from its argument.
+
+(define flatten (lambda (lst)
+   (cond ((null? lst) '())
+        ((pair? (car lst)) 
+		(append (flatten (car lst))
+			(flatten (cdr lst))))
+   (else (cons (car lst) 
+	(flatten (cdr lst)
+	))))
+	)
+)

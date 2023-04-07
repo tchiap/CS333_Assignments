@@ -1,0 +1,42 @@
+; Tom Chiapete
+; Computer Science 333 -- Programming Languages
+; Feb 6, 2006
+
+
+; (1) (duple n x) returns a list containing n copies of x
+
+(define duple
+	(lambda (n x)
+		(if (zero? n) '() 
+			(cons x (duple (- n 1) x)
+			)
+		)
+	)
+)
+
+; (2) (invert lst), where lst is a list of 2-lists (lists of length two), returns a list with each 2-list reversed.
+(define invert
+	(lambda (lst)
+		(if (null? lst) '()
+			(cons (reverse(car lst))
+				(invert(cdr lst))
+			)
+		)
+	)
+)
+
+;(7) (list-set lst n x) returns a list like lst, except that the n-th element, using zero-based indexing, is x.
+(define list-set
+	(lambda (lst n x)
+		(if (zero? n)	(cons x (cdr lst))
+			(cons (car lst) (list-set(cdr lst) (- n 1) x))
+		)
+	)
+)
+
+; (8) (product los1 los2) returns a list of two lists that represents the Cartesian product of los1 and los2. The 2-lists may appear in any order.
+(define product(lambda (los1 los2)(if (null? los1) '()
+                                        (if(null? los2) '()
+                                         (cons (list (car los1)(car los2))(append (product (list (car los1)) (cdr los2))(											product (cdr los1)los2)))))))
+				
+

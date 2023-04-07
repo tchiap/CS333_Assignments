@@ -1,0 +1,20 @@
+(define verify_tree (lambda (t)
+	(if (null? t ) #t
+		(if (number? (car t))
+			(if (and (verify_tree (cadr t))
+		(verify_tree (caddr t)) ) #t #f) #f) #t )))
+
+
+(define depth (lambda (t)
+	(if (null? t) ()
+		(if (> (depth (cadr t)) (depth (caddr t)))
+			(+ 1 (depth (cadr t)))
+			(+ 1 (depth (caddr t)))))))
+
+
+(define all-e (lambda (t)
+	(if (null? t ) '()
+	(cons (car t) (all-e (cadr t)))
+	(all-e (caddr t))))))
+
+
